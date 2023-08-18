@@ -11,6 +11,8 @@ console.log(null <= 0); // true: because the comparison converts to Number since
 console.log(typeof null);
 //Number(undefined) => Nan
 //Number(null) => 0
+let num = 2;
+console.log(num *= num += 3); // because they are asignations, it starts form the right side => num *= 5 => 10
 
 // String(1) = "1"
 
@@ -26,3 +28,10 @@ console.log(undefined < 0);
 console.log(Number([])); // 0
 console.log(Number({})); // NaN
 // https://quizzesforyou.com/quizzes/javascript
+
+const check = "";
+if (null !== check && undefined !== check){ // if is not null or undefined  !!false => false
+    console.log('variable with value');
+}else{
+    console.log('variable null or undefined');
+}

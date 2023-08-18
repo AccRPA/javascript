@@ -39,3 +39,6 @@ console.log(obj1 + 2); // hint default => both are numbers => there is no conver
 console.log(obj1 * 2); // hint number => no conversion to Number, because both are numbers => 4
 
 console.log(Symbol.toPrimitive); // is the symbol javascript uses for the conversion before toString() and valueOf()
+
+console.log(null == undefined); // true
+console.log(null === undefined); // false; there is no conversion and they are different types
