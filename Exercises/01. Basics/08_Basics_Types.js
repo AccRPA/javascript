@@ -35,3 +35,9 @@ if (null !== check && undefined !== check){ // if is not null or undefined  !!fa
 }else{
     console.log('variable null or undefined');
 }
+
+function example(){
+    var a = 10;
+}
+example();
+console.log(a);
