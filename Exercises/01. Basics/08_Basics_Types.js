@@ -36,8 +36,21 @@ if (null !== check && undefined !== check){ // if is not null or undefined  !!fa
     console.log('variable null or undefined');
 }
 
-function example(){
+/* function example(){
     var a = 10;
 }
 example();
-console.log(a);
+console.log(a); */
+
+const myObj1 = {
+    name: 'Sarah'
+};
+const myObj2 = {
+    name: 'Sarah'
+}
+console.log(myObj1 == myObj2); // false, there is no conversion because both are the same type and the obj references are different
+console.log(myObj1 === myObj2); // false, there is no conversion and the obj references are different
+console.log(Number(myObj1)); // myObj will return the string [object Object] to Number is NaN
+console.log(myObj1 + myObj2); // return the string [object Object][object Object]
+console.log(myObj1 - myObj2); // try to convert a Number => NaN
+console.log(myObj1 + 2); // return theString [object Object]2, because myObj1 return a string
