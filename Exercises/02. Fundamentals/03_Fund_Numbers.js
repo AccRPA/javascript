@@ -38,12 +38,17 @@ console.log(parseFloat('12.234').toFixed(2));
 const obj = {
     [Symbol.toPrimitive]: function(hints){
         return hints === 'string' ? 'hi!' : hints === 'number' ? 4 : 'dunno';
+    },
+    salutation(){
+        console.log('I say hi!');
     }
 }
 const objw = {};
 objw[obj] = 'nested!';
 console.log(obj * 2);
 console.log(objw['hi!']);
+
+console.log(obj?.salutation?.());
 
 // Crea un script que pida al visitante que ingrese dos números y muestre su suma.
 const number1 = 'whatever';
