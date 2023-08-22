@@ -125,3 +125,5 @@ function randomColor(){
 }
 
 console.log(`new color: #${randomColor()}`);
+
+console.log(Number.parseInt('ff', 16));
