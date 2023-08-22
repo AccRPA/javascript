@@ -60,3 +60,5 @@ function extractCurrencyValue(str){
 }
 console.log(extractCurrencyValue('$120') === 120); // true
 console.log(extractCurrencyValue(null));
+
+console.log('hello'.repeat(4));
