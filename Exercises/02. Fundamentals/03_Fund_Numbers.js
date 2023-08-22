@@ -18,8 +18,8 @@ console.log((1.2).toFixed(2));
 
 console.log(typeof Infinity);
 console.log(typeof NaN);
-console.log(0 === -0);
-console.log(Object.is(0, -0)); // ===
+console.log(0 === -0); // true
+console.log(Object.is(0, -0)); // false
 console.log(typeof Number);
 console.log(Infinity === Infinity);
 
