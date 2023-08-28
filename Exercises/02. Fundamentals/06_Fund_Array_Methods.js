@@ -198,3 +198,72 @@ console.log( users[2].name ) // Pete
  * Por ejemplo, [1,2,3] puede ser reordenado como [1,2,3] o [1,3,2] o [3,1,2] etc, 
  * con igual probabilidad en cada caso.
  */
+function shuffle(arr){
+    arr.forEach((item, index) => {
+        const randomIndex = Math.floor(Math.random() * arr.length);
+        const temp = arr[randomIndex];
+        arr[randomIndex]  = item;
+        arr[index] = temp;  
+    })
+}
+const arr8 = [1, 2, 3];
+shuffle(arr8)
+console.log(arr8);
+shuffle(arr8)
+console.log(arr8);
+shuffle(arr8)
+console.log(arr8);
+
+
+const arr9 = [1, 42, 30, 3, 67, 12, 33];
+shuffle(arr9)
+console.log(arr9);
+shuffle(arr9)
+console.log(arr9);
+shuffle(arr9)
+console.log(arr9);
+
+/**
+ * Obtener edad promedio
+ * Escribe la función getAverageAge(users) que obtenga un array de objetos con la propiedad age y 
+ * devuelva el promedio de age.
+ * La fórmula de promedio es (age1 + age2 + ... + ageN) / N.
+ */
+function getAverageAge(users){
+    return users.reduce((accumulator, item) => accumulator + item.age, 0) / users.length;
+}
+
+let arr11 = [ john, pete, mary ];
+console.log( getAverageAge(arr11) ); // (25 + 30 + 29) / 3 = 28
+
+/**
+ * Filtrar elementos únicos de un array
+ * Partiendo del array arr.
+ * Crea una función unique(arr) que devuelva un array con los elementos 
+ * que se encuentran una sola vez dentro de arr.
+ */
+function unique(arr){
+    return arr.reduce((accumulator, item) => {
+        if (!accumulator.includes(item)){
+            accumulator.push(item);
+        }
+        return accumulator;
+    }, []);
+}
+let strings = ["Hare", "Krishna", "Hare", "Krishna", "Krishna", "Krishna", "Hare", "Hare", ":-O"];
+console.log( unique(strings) );
+
+/**
+ * Crea un objeto a partir de un array
+ * Supongamos que recibimos un array de usuarios con la forma {id:..., name:..., age:... }.
+ * Crea una función groupById(arr) que cree un objeto, con id como clave (key) y los elementos del array 
+ * como valores.
+ */
+function groupById(arr){
+    return arr.reduce((accumulator, item) => {
+        accumulator[item.id] = item;
+        return accumulator;
+    }, {});
+}
+let usersById = groupById(users);
+console.log(usersById);
