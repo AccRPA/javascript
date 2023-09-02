@@ -65,3 +65,42 @@ const arr1 = Array.from(obj1);
 for (let item of arr1){
     console.log(`arr1 item: ${item}`); // eight, thirty-nine, undefined, undefined
 }
+
+const obj4 = {
+    [Symbol.iterator]: () =>{
+        let value = 0;
+        return {
+            next: () => {
+                return value++;
+            }
+        }
+    }
+}
+
+// why the let variable increases its value if it is not part of the returned object?? 
+const iterator = obj4[Symbol.iterator]();
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+console.log(iterator.next());
+
+function host(){
+    let value = 3;
+    return function(){
+        return {
+            myvalue: ++value
+        }
+    }
+}
+
+console.log(host()().myvalue);
+
+const myObj8 = {
+    moon: 9,
+    sun: '10',
+    pluto: 'planet'
+}
+console.log(myObj8['moon']);
+for (let item of myObj8){ // error, not iterable
+    console.log(item);
+}

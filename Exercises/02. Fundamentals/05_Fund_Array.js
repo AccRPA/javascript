@@ -88,3 +88,6 @@ getMaxSubSum([-1, -2, -3]) = 0 Si todos los elementos son negativos, significa q
 function getMaxSubSum(arr){
 
 }
+
+const myArr = new Array({});
+console.log(myArr.length); // 1
