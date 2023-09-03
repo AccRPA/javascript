@@ -38,3 +38,30 @@ function count(obj){
 }
 
 console.log(count(user));
+
+const arr = [{name: 'john'}, {name: 'Tri'}, {name: 'Sarah'}];
+console.log(arr);
+function initializeVisits(arr){
+    const obj = {visits: 0};
+    return arr.map(item => {
+        // convert object to array
+        const arrtemp = Object.entries(item); // [['name', 'john'], ['name', 'Tri'], etc]
+
+        // this does not work, because Array.from takes an iterable, and an object is not it
+        const arrfrom = Array.from(obj);
+
+        arrtemp.push(Object.entries(obj)[0]); // [['visits', 0]]  [0] to access the array  
+        console.log(JSON.stringify(arrtemp));
+        const changed = Object.fromEntries(arrtemp); // return the object
+        console.log(JSON.stringify(changed));
+        return changed;
+    });
+    // simpler
+    /* return arr.map(item => {
+        item['visits'] = 0
+        return item;
+    }); */
+}
+
+const arrResult = initializeVisits(arr);
+console.log(JSON.stringify(arrResult));
