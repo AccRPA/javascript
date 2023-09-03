@@ -12,7 +12,7 @@ const arr = [1, [2,3], {23: 34}, 34, 234];
 console.log(arr.keys());
 console.log(arr.values());
 
-for (let pair of arr.entries()){
-    console.log(pair[0]); // keys, array index
-    console.log(pair[1]); // values
+for (let [key, value] of arr.entries()){
+    console.log(key); // keys, array index
+    console.log(value); // values
 }
