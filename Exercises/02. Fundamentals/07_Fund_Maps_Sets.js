@@ -67,3 +67,62 @@ let keys = map3.keys(); // iterable ->  array-like
 keys = Array.from(map3.keys()); // no is an array
 keys.push("more");
 console.log(keys);
+
+
+/**
+ * THIS WORKS BY REFERENCE COPY BECAUSE IT IS AN OBJECT.
+ * The reference in the variable is copied to the array, map or set, so if the variable is null,
+ * the copy reference to the object is still there, the problem is that now we don't have that direct reference anymore 
+ * then to get that value or key we have to loop the array or use map.keys
+ */
+
+let john = {
+    age: 34
+};
+const myarr = [john];
+const mymap = new Map();
+mymap.set(john, 'myjohn');
+console.log(myarr[0]);
+console.log(mymap.get(john));
+john = null; // the object still exist but this reference is null
+console.log(myarr[0]); // this reference to the object exist
+console.log(mymap.get(john)); // this reference does not exist, because the reference is null
+console.log(mymap.get(null)); // null as a key does not exist
+console.log(mymap); // the map still has the object has a key 
+
+console.log(mymap.set({
+    age: 34
+}, 'hello')); // it does work because is a new object with a different reference
+console.log(mymap.get({
+    age: 34
+})); // it does work because is a new object with a different reference
+
+const obj2 = {
+    NaN: 'isNaN'
+};
+console.log(obj2['NaN']);
+
+
+const objchange = {
+    age: 45
+};
+
+/* const mapChange = new Map(Object.entries(objchange));
+console.log(mapChange);
+objchange.age = 20;
+console.log(mapChange);
+console.log(mapChange.get('age')); */
+
+const mapChange2 = new Map();
+mapChange2.set(objchange, 'change');
+console.log(mapChange2);
+objchange.age = 20;
+console.log(mapChange2);
+console.log(mapChange2.get(objchange)); // it is the same reference, even when the object has changed
+
+const mapChange3 = new Map();
+mapChange3.set('change', objchange);
+console.log(mapChange3);
+objchange.age = 70;
+console.log(mapChange3);
+console.log(mapChange3.get('change')); 
