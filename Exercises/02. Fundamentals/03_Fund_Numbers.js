@@ -127,3 +127,7 @@ function randomColor(){
 console.log(`new color: #${randomColor()}`);
 
 console.log(Number.parseInt('ff', 16));
+
+
+console.log(isNaN(null)); // false -> convert to Number Number(null) = 0
+console.log(isFinite(null)); // true only if it is not NaN, infinite or -infinite, so it will return true
