@@ -68,3 +68,21 @@ function topSalary(salaries){
 }
 
 console.log(topSalary(salaries));
+
+console.log(isNaN('null')); // true
+console.log(isNaN('undefined')); // true
+console.log(isFinite(null)); // true
+console.log(Number.isFinite(null)); // false
+console.log(Number.isFinite(undefined)); // false
+console.log(Number.isFinite('0')); // false
+console.log(Number.isFinite(0)); // true
+console.log(Number.isFinite(-0)); // true
+console.log(Number.isNaN(null)); // false (first it has to be a number, null is not a number)
+console.log(Number.isNaN(undefined)); // false (first it has to be a number, undefined is not a number)
+console.log(Number.isNaN('undefined')); // false (first it has to be a number, 'undefined' is not a number is a string)
+console.log(Number.isNaN(0)); // false
+console.log(Number.isNaN(-0)); // false
+console.log(Number.isNaN(NaN)); // true
+
+console.log(typeof null);
+console.log(typeof undefined);
