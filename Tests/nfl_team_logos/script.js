@@ -142,7 +142,8 @@ const teamLogos = [
     {
         team: 'New York Giants',
         file: 'New_York_Giants',
-        color: '#ffffff'
+        color: '#8e8e8e'
+        // #8e8e8e  hsl(0,0%,56%)rgb(142,142,142)
         // #001e66 hsl(222,100%,20%)rgb(0,30,102)
     },
     {
@@ -214,12 +215,13 @@ document.getElementById('name_right').innerText = team2.team;
 
 
 function getTwoIndexes(){
-    const index1 = Math.round(Math.random() * teamLogos.length);
-    let index2 = Math.round(Math.random() * teamLogos.length);
+    const index1 = Math.floor(Math.random() * teamLogos.length);
+    let index2 = Math.floor(Math.random() * teamLogos.length);
     do{
-        index2 = Math.round(Math.random() * teamLogos.length);
+        index2 = Math.floor(Math.random() * teamLogos.length);
     }while(index1 === index2);
 
+    console.log(index1, index2);
     return {index1, index2};
 }
 
