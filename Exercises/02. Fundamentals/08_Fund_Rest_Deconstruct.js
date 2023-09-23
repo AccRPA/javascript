@@ -86,3 +86,6 @@ console.log(Number.isNaN(NaN)); // true
 
 console.log(typeof null);
 console.log(typeof undefined);
+
+console.log(null == undefined);
+console.log(null === undefined); // no type coercion
