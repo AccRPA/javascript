@@ -25,6 +25,11 @@
     flex-direction: column;
 }
 
+.sides img {
+    width: 80%;
+    height: auto;
+}
+
 .sides p {
     font-size: 1rem;
     text-align: center;
