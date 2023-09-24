@@ -297,6 +297,7 @@ function callInterval(team1, team2){
                 startButton.style.visibility = 'visible';
                 timerLayer.style.display = 'none';
             }else{
+                timerLayer.innerText = '-';
                 (setTimeout(() => {
                     start();
                 }, 3000))();
