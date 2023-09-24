@@ -195,8 +195,12 @@ const teamLogos = [
         color: '#5a1414'
         // hsl(0,64%,22%)rgb(90,20,20)
     }
-]
+];
+let automatic_mode = false;
 
+const menu = document.getElementById('menu');
+const submenu = document.getElementById('submenu');
+const automatic_check = document.getElementById('automatic');
 const startButton = document.getElementById('start');
 const timerLayer = document.getElementById('timer');
 
@@ -208,32 +212,35 @@ const rightSide = document.getElementById('right_side');
 const rightImage = document.getElementById('img_right');
 const rightName = document.getElementById('name_right');
 
+let interval;
+
+menu.addEventListener('click', function(){
+    if (submenu.style.display === 'block'){
+        submenu.style.display = 'none';
+    }else{
+        submenu.style.display = 'block';
+    }
+});
+
+automatic_check.addEventListener('click', function(){
+    automatic_mode = !automatic_mode;
+    if (automatic_mode){
+        start();
+    }else{
+        if (!!interval){
+            clearInterval(interval);
+        }
+        startButton.style.display = 'block';
+        startButton.style.visibility = 'visible';
+        timerLayer.style.display = 'none';
+        timerLayer.innerText = 0;
+    }
+});
+
 startButton.addEventListener('click',
 function(){
-    // toggle the play button and time layer
-    startButton.style.display = 'none';
-    startButton.style.visibility = 'hidden';
-    timerLayer.style.display = 'block';
-    timerLayer.innerText = 0;
-
-    // remove the teams names
-    leftName.innerText = null;
-    rightName.innerText = null;
-
-    //show the teams logos
-    const indexes = getTwoIndexes();
-    const team1 = teamLogos[indexes.index1];
-    const team2 = teamLogos[indexes.index2];
-    
-    leftImage.setAttribute('src', `${rootPathFile}${team1.file}.${file_extension}`);
-    leftSide.style.backgroundColor = team1.color;
-    
-    rightImage.setAttribute('src', `${rootPathFile}${team2.file}.${file_extension}`);
-    rightSide.style.backgroundColor = team2.color;
-
-    // start the timer
-    callInterval(team1, team2);
-});    
+    start();
+});
 
 function getTwoIndexes(){
     const index1 = randomNumber();
@@ -249,21 +256,51 @@ function randomNumber(){
     return Math.floor(Math.random() * teamLogos.length);
 }
 
+function start(){
+    // toggle the play button and time layer
+    startButton.style.display = 'none';
+    startButton.style.visibility = 'hidden';
+    timerLayer.style.display = 'block';
+    timerLayer.innerText = 0;
+
+    // remove the teams names
+    leftName.innerText = null;
+    rightName.innerText = null;
+    
+    //show the teams logos
+    const indexes = getTwoIndexes();
+    const team1 = teamLogos[indexes.index1];
+    const team2 = teamLogos[indexes.index2];
+    
+    leftImage.setAttribute('src', `${rootPathFile}${team1.file}.${file_extension}`);
+    leftSide.style.backgroundColor = team1.color;
+    
+    rightImage.setAttribute('src', `${rootPathFile}${team2.file}.${file_extension}`);
+    rightSide.style.backgroundColor = team2.color;
+
+    // start the timer
+    callInterval(team1, team2);
+}
 // Interval for guessing the teams names in 5 seconds
 function callInterval(team1, team2){
     let timerStart = 1;
-    let interval = setInterval(() => {
+    interval = setInterval(() => {
         if (timerStart > timeToGuess){
             // display the teams names
             leftName.innerText = team1.team;
             rightName.innerText = team2.team;
-
-            // toggle the play button and the time layer
-            startButton.style.display = 'block';
-            startButton.style.visibility = 'visible';
-            timerLayer.style.display = 'none';
-
+            
             clearInterval(interval);
+            if (!automatic_mode){
+            // toggle the play button and the time layer
+                startButton.style.display = 'block';
+                startButton.style.visibility = 'visible';
+                timerLayer.style.display = 'none';
+            }else{
+                (setTimeout(() => {
+                    start();
+                }, 3000))();
+            }        
         }else{
             timerLayer.innerText = timerStart;
             timerStart++;
