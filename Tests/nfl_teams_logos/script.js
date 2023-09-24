@@ -1,7 +1,8 @@
-const timeToGuess = 5; // seconds
-const rootPathFile = 'logos/';
-const file_extension = 'png';
-const teamLogos = [
+const DEFAULT_TIMER = 5; // seconds
+const DEFAULT_ANSWER_TIMER = 3; // seconds
+const ROOT_PATH_FILE = 'logos/';
+const FILE_EXTENSION = 'png';
+const TEAM_LOGOS = [
     {   
         team: 'Arizona Cardinals',
         file: 'Arizona_Cardinals',
@@ -196,11 +197,21 @@ const teamLogos = [
         // hsl(0,64%,22%)rgb(90,20,20)
     }
 ];
+
+let interval;
+let timeout;
 let automatic_mode = false;
+let timeToGuess = DEFAULT_TIMER;
+let answerDisplayTimer = DEFAULT_ANSWER_TIMER;
 
 const menu = document.getElementById('menu');
 const submenu = document.getElementById('submenu');
 const automatic_check = document.getElementById('automatic');
+const guessingTimer = document.getElementById('guessingTimer');
+const answerTimer = document.getElementById('answerTimer');
+
+const applyButton = document.getElementById('apply');
+
 const startButton = document.getElementById('start');
 const timerLayer = document.getElementById('timer');
 
@@ -212,7 +223,8 @@ const rightSide = document.getElementById('right_side');
 const rightImage = document.getElementById('img_right');
 const rightName = document.getElementById('name_right');
 
-let interval;
+guessingTimer.value = DEFAULT_TIMER;
+answerTimer.value = DEFAULT_ANSWER_TIMER;
 
 menu.addEventListener('click', function(){
     if (submenu.style.display === 'block'){
@@ -222,18 +234,30 @@ menu.addEventListener('click', function(){
     }
 });
 
-automatic_check.addEventListener('click', function(){
-    automatic_mode = !automatic_mode;
+applyButton.addEventListener('click', function(){
+    automatic_mode = automatic_check.checked;
+    timeToGuess = +guessingTimer.value || DEFAULT_TIMER;    
+    answerDisplayTimer = +answerTimer.value || DEFAULT_ANSWER_TIMER;
+
+    // close the submenu
+    submenu.style.display = 'none';
+    if (!!interval){
+        clearInterval(interval);
+    }
+    if(!!timeout){
+        clearTimeout(timeout);
+    }
+
     if (automatic_mode){
         start();
     }else{
-        if (!!interval){
-            clearInterval(interval);
-        }
-        startButton.style.display = 'block';
-        startButton.style.visibility = 'visible';
-        timerLayer.style.display = 'none';
-        timerLayer.innerText = 0;
+        resetPlayButton();
+
+        // deleting the data from both sides
+        leftImage.src = '';
+        leftSide.style.backgroundColor = 'initial';
+        rightImage.src = '';
+        rightSide.style.backgroundColor = 'initial';
     }
 });
 
@@ -253,7 +277,14 @@ function getTwoIndexes(){
 }
 
 function randomNumber(){
-    return Math.floor(Math.random() * teamLogos.length);
+    return Math.floor(Math.random() * TEAM_LOGOS.length);
+}
+
+function resetPlayButton(){
+    startButton.style.display = 'block';
+    startButton.style.visibility = 'visible';
+    timerLayer.style.display = 'none';
+    timerLayer.innerText = 0;
 }
 
 function start(){
@@ -269,13 +300,13 @@ function start(){
     
     //show the teams logos
     const indexes = getTwoIndexes();
-    const team1 = teamLogos[indexes.index1];
-    const team2 = teamLogos[indexes.index2];
+    const team1 = TEAM_LOGOS[indexes.index1];
+    const team2 = TEAM_LOGOS[indexes.index2];
     
-    leftImage.setAttribute('src', `${rootPathFile}${team1.file}.${file_extension}`);
+    leftImage.src = `${ROOT_PATH_FILE}${team1.file}.${FILE_EXTENSION}`;
     leftSide.style.backgroundColor = team1.color;
     
-    rightImage.setAttribute('src', `${rootPathFile}${team2.file}.${file_extension}`);
+    rightImage.src = `${ROOT_PATH_FILE}${team2.file}.${FILE_EXTENSION}`;
     rightSide.style.backgroundColor = team2.color;
 
     // start the timer
@@ -286,24 +317,21 @@ function callInterval(team1, team2){
     let timerStart = 1;
     interval = setInterval(() => {
         if (timerStart > timeToGuess){
+            clearInterval(interval);
             // display the teams names
             leftName.innerText = team1.team;
             rightName.innerText = team2.team;
-            
-            clearInterval(interval);
-            if (!automatic_mode){
-            // toggle the play button and the time layer
-                startButton.style.display = 'block';
-                startButton.style.visibility = 'visible';
-                timerLayer.style.display = 'none';
-            }else{
+
+            if (automatic_mode){
                 timerLayer.innerText = '-';
                 (() => {
-                    setTimeout(() => {
+                    timeout = setTimeout(() => {
                         start();
-                    }, 3000);
+                    }, answerDisplayTimer * 1000);
                 })();
-            }        
+            }else{
+                resetPlayButton();
+            }      
         }else{
             timerLayer.innerText = timerStart;
             timerStart++;

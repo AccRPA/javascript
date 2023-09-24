@@ -19,8 +19,21 @@
         </div>
         <div id="submenu">
             <div class="submenu_container">
-                <label for="automatic">Automatic mode</label>
-                <input type="checkbox" name="automatic" id="automatic">            
+                <div class="submenu_group">
+                    <label for="automatic">Automatic mode</label>
+                    <input type="checkbox" name="automatic" id="automatic">
+                </div>
+                <div class="submenu_group">
+                    <label for="guessingTimer">Time for guessing (sec)</label>
+                    <input type="number" min="1" max="10" step="1" 
+                        class="input_number" name="guessingTimer" id="guessingTimer">
+                </div>
+                <div class="submenu_group">
+                    <label for="answerTimer">Display answer (sec)</label>
+                    <input type="number" min="2" max="10" step="1" 
+                        class="input_number" name="answerTimer" id="answerTimer">
+                </div>
+                <button id="apply" class="apply_button">Apply</button>
             </div>
         </div>
         <div class="container">
