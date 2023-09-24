@@ -4,8 +4,9 @@
         <meta lang="en">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>NFL Team Logos</title>
+        <title>NFL Teams Logos</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
@@ -18,9 +19,16 @@
                 <img id="img_right">
                 <p id="name_right"></p> 
             </div>
-            <button id="start">
-                <img src="logos/NFL_Logo.png">
-            </button>
+            <div class="center_layer">
+                <button id="start" title="click to start">
+                    <i class="fa fa-play"></i>
+                </button>
+                <div id="timer"></div>
+            </div>
+        </div>
+        <div class="footer">
+            <img class="nfl_icon" src="logos/NFL_Logo.png">
+            <div class="made">2023 <span class="heart">&#10084;</span></div>
         </div>
         <script src="script.js"></script>
     </body>

@@ -1,0 +1,134 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: all 0.5s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    background-color: darkgray;
+}
+
+.sides {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sides img {
+    width: 80%;
+    max-width: 300px;
+    height: auto;
+}
+
+.sides p {
+    font-size: 1.5rem;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    min-height: 5rem;
+}
+
+.center_layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    overflow: hidden;
+    border: 2px solid #003a70;
+    -webkit-box-shadow: 0px 0px 5px 0px #000000; 
+    box-shadow: 0px 0px 5px 0px #000000;    
+    background-color: #003a70;
+}
+
+.center_layer button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.center_layer button:hover{
+    cursor: pointer
+}
+
+.center_layer button:focus{
+    outline: none;
+}
+
+.center_layer button i{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);    
+    transform: scale(3, 3);
+    transform-origin: center center; 
+    color: white;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.nfl_icon{
+    width: 3rem;
+    height: 3rem;
+}
+
+.made {
+    font-size: 0.5rem;
+}
+
+#timer {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: white;
+}
+
+
+.made .heart{
+    color: #e31b23;
+}
+
+@media only screen and (max-width: 576px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sides {
+        width: 100%;
+        height: 50%;
+    }
+    .sides img {
+        height: 80%;
+        max-height: 170px;
+        width: auto;
+    }
+
+    .nfl_icon{        
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
