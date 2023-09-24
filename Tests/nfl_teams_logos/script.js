@@ -102,8 +102,9 @@ const TEAM_LOGOS = [
     {
         team: 'Las Vegas Raiders',
         file: 'Las_Vegas_Raiders',
-        color: '#a0abae'
-        // hsl(193,8%,65%)rgb(160,171,174)
+        color: '#a5acaf'
+        // #a5acaf  hsl(198,6%,67%)rgb(165,172,175)
+        // #a0abae hsl(193,8%,65%)rgb(160,171,174)
     },
     {
         team: 'Los Angeles Chargers',
@@ -236,8 +237,12 @@ menu.addEventListener('click', function(){
 
 applyButton.addEventListener('click', function(){
     automatic_mode = automatic_check.checked;
-    timeToGuess = +guessingTimer.value || DEFAULT_TIMER;    
-    answerDisplayTimer = +answerTimer.value || DEFAULT_ANSWER_TIMER;
+    timeToGuess = getValue(guessingTimer.value, DEFAULT_TIMER);
+    answerDisplayTimer = getValue(answerTimer.value, DEFAULT_ANSWER_TIMER);
+
+    // updating the values in case they were no valid
+    guessingTimer.value = timeToGuess;
+    answerTimer.value = answerDisplayTimer;
 
     // close the submenu
     submenu.style.display = 'none';
@@ -258,6 +263,8 @@ applyButton.addEventListener('click', function(){
         leftSide.style.backgroundColor = 'initial';
         rightImage.src = '';
         rightSide.style.backgroundColor = 'initial';
+        leftName.innerText = '';
+        rightName.innerText = '';
     }
 });
 
@@ -278,6 +285,13 @@ function getTwoIndexes(){
 
 function randomNumber(){
     return Math.floor(Math.random() * TEAM_LOGOS.length);
+}
+
+function getValue(valueText, defaultValue){
+    if(!valueText){
+        return defaultValue;
+    }
+    return +valueText <= 0 ? defaultValue : +valueText;
 }
 
 function resetPlayButton(){
