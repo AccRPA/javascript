@@ -298,9 +298,11 @@ function callInterval(team1, team2){
                 timerLayer.style.display = 'none';
             }else{
                 timerLayer.innerText = '-';
-                (setTimeout(() => {
-                    start();
-                }, 3000))();
+                (() => {
+                    setTimeout(() => {
+                        start();
+                    }, 3000);
+                })();
             }        
         }else{
             timerLayer.innerText = timerStart;
