@@ -298,7 +298,7 @@ function resetPlayButton(){
     startButton.style.display = 'block';
     startButton.style.visibility = 'visible';
     timerLayer.style.display = 'none';
-    timerLayer.innerText = 0;
+    timerLayer.innerText = '';
 }
 
 function start(){
@@ -306,7 +306,7 @@ function start(){
     startButton.style.display = 'none';
     startButton.style.visibility = 'hidden';
     timerLayer.style.display = 'block';
-    timerLayer.innerText = 0;
+    timerLayer.innerText = '';
 
     // remove the teams names
     leftName.innerText = null;
@@ -328,9 +328,10 @@ function start(){
 }
 // Interval for guessing the teams names in 5 seconds
 function callInterval(team1, team2){
-    let timerStart = 1;
+    let timerStart = timeToGuess;
+    timerLayer.innerText = timerStart;
     interval = setInterval(() => {
-        if (timerStart > timeToGuess){
+        if (timerStart == 1){
             clearInterval(interval);
             // display the teams names
             leftName.innerText = team1.team;
@@ -347,8 +348,8 @@ function callInterval(team1, team2){
                 resetPlayButton();
             }      
         }else{
+            timerStart--;
             timerLayer.innerText = timerStart;
-            timerStart++;
         }
     }, 1000);
 }
