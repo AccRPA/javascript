@@ -40,6 +40,15 @@
     min-height: 5rem;
 }
 
+#startText {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 2px;
+    text-align: center;    
+    color: #ffffff;
+}
+
 .center_layer {
     position: absolute;
     top: 50%;
@@ -61,6 +70,8 @@
     background-color: transparent;
     width: 100%;
     height: 100%;
+    display: block;
+    margin-left: 2px;
 }
 
 .center_layer button:hover{
@@ -73,13 +84,8 @@
     outline: none;
 }
 
-.center_layer button i{
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -40%);    
-    transform: scale(3, 3);
-    transform-origin: center center; 
+.center_layer button i{ 
+    font-size: 2.5rem;
     color: white;
 }
 

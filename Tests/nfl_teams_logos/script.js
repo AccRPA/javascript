@@ -213,6 +213,7 @@ const answerTimer = document.getElementById('answerTimer');
 
 const applyButton = document.getElementById('apply');
 
+const startText = document.getElementById('startText');
 const startButton = document.getElementById('start');
 const timerLayer = document.getElementById('timer');
 
@@ -235,7 +236,7 @@ menu.addEventListener('click', function(){
     }
 });
 
-applyButton.addEventListener('click', function(){
+applyButton.addEventListener('click', function(){    
     automatic_mode = automatic_check.checked;
     timeToGuess = getValue(guessingTimer.value, DEFAULT_TIMER);
     answerDisplayTimer = getValue(answerTimer.value, DEFAULT_ANSWER_TIMER);
@@ -259,6 +260,7 @@ applyButton.addEventListener('click', function(){
         resetPlayButton();
 
         // deleting the data from both sides
+        startText.style.display = 'block';
         leftImage.src = '';
         leftSide.style.backgroundColor = 'initial';
         rightImage.src = '';
@@ -294,7 +296,7 @@ function getValue(valueText, defaultValue){
     return +valueText <= 0 ? defaultValue : +valueText;
 }
 
-function resetPlayButton(){
+function resetPlayButton(){    
     startButton.style.display = 'block';
     startButton.style.visibility = 'visible';
     timerLayer.style.display = 'none';
@@ -303,6 +305,7 @@ function resetPlayButton(){
 
 function start(){
     // toggle the play button and time layer
+    startText.style.display = 'none';
     startButton.style.display = 'none';
     startButton.style.visibility = 'hidden';
     timerLayer.style.display = 'block';
