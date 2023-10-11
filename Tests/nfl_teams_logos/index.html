@@ -10,55 +10,38 @@
         <meta http-equiv="Expires" content="-1">
         <meta name="description" content="NFL Teams Logos game, Guess the team, NFL logos, NFL 2023 game">
         <link rel="icon" type="image/x-icon" href="football_icon.ico">
-        <title>NFL Teams Logos</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+        <title>NFL Teams Logos Game</title>
+        <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/suez-one">
+        <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/sunflower-2">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <div id="menu">
-            <i class="fa fa-bars"></i>
-        </div>
-        <div id="submenu">
-            <div class="submenu_container">
-                <div class="submenu_group">
-                    <label for="automatic">Automatic mode</label>
-                    <input type="checkbox" name="automatic" id="automatic">
+        <main>
+            <section class="container" title="Homepage" data-home>
+                <div class="side left-side">
+                    <img class="defult-bkg-img" src="logos/NFL_Logo.png">
                 </div>
-                <div class="submenu_group">
-                    <label for="guessingTimer">Time for guessing (sec)</label>
-                    <input type="number" min="1" max="10" step="1" 
-                        class="input_number" name="guessingTimer" id="guessingTimer">
+                <div class="side right-side">
+                    <img class="defult-bkg-img" src="logos/NFL_Logo.png">
+                </div>                
+                <div class="title">
+                    <h1>NFL TEAMS LOGOS GAME</h1>
+                    <h3>Guess the team name from the logo</h3>
                 </div>
-                <div class="submenu_group">
-                    <label for="answerTimer">Display answer (sec)</label>
-                    <input type="number" min="1" max="10" step="1" 
-                        class="input_number" name="answerTimer" id="answerTimer">
+                <div class="play-button">
+                    <button>
+                        <img src="icons/icon_football.png">
+                    </button>
                 </div>
-                <button id="apply" class="apply_button">Apply</button>
-            </div>
-        </div>
-        <div class="container">
-            <div id="left_side" class="sides">
-                <img id="img_left">
-                <p id="name_left"></p> 
-            </div>
-            <div id="right_side" class="sides">
-                <img id="img_right">
-                <p id="name_right"></p> 
-            </div>
-            <h2 id="startText">Click play to guess the NFL teams</h2>
-            <div class="center_layer">
-                <button id="start" title="click to start">
-                    <i class="fa fa-play"></i>
-                </button>
-                <div id="timer"></div>
-            </div>
-        </div>
-        <div class="footer">
-            <img class="nfl_icon" src="logos/NFL_Logo.png">
-            <div class="made">2023 <span class="heart">&#10084;</span></div>
-        </div>
+            </section>
+            <section class="container" title="Game page" data-game style="display: none">
+                <img class="nfl_icon" src="logos/NFL_Logo.png">
+            </section>
+        </main>
+        <footer class="footer">
+            <div class="made">Made with <span>&#10084;</span> in 2023</div>
+        </footer>
         <script src="script.js"></script>
     </body>
 </html>
