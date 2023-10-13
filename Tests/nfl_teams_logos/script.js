@@ -199,6 +199,25 @@ const TEAM_LOGOS = [
     }
 ];
 
+const header = document.querySelector("header");
+const playButton = document.querySelector("[data-play]");
+const homeSection = document.querySelector("[data-home]");
+const leftSide = document.querySelector("[data-side='left']");
+const rightSide = document.querySelector("[data-side='right']");
+const gameSection = document.querySelector("[data-game]");
+
+// when going back to home
+//header.classList.toggle('header-slide-top-to-bottom');
+//playButton.classList.toggle('dissapear');
+
+playButton.addEventListener('mouseup', function(){
+    header.classList.toggle('header-slide-bottom-to-top');
+    playButton.classList.toggle('dissapear');
+    leftSide.classList.toggle('left-side-dissapear');
+    rightSide.classList.toggle('right-side-dissapear');
+
+});
+/* 
 let interval;
 let timeout;
 let automatic_mode = false;
@@ -355,4 +374,4 @@ function callInterval(team1, team2){
             timerLayer.innerText = timerStart;
         }
     }, 1000);
-}
+} */

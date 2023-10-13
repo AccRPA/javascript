@@ -1,3 +1,5 @@
+@import url(./animations.css);
+
 *, 
 *::after, 
 *::before {
@@ -13,18 +15,23 @@
     --grey-dark-color: #E6E6E6;
     --blue-color: #013369;
     --red-color: #D50A0A;
+    --football-rotate: 10deg;
 }
 
 body {
     font-family: 'Suez One', 'Sunflower', sans-serif;
     overflow: hidden;
+    background-color: var(--grey-dark-color);
 }
 
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background-color: var(--grey-dark-color);
     overflow: hidden;
+}
+
+.homepage{
+    z-index: 1;
 }
 
 .side {
@@ -122,12 +129,13 @@ header .starts{
 .play-button button > img {
     width: 50%;
     height: auto;
-    transform: rotate(-30deg);
+    transform: rotate(calc(-1 * var(--football-rotate)));
     animation: football 2s ease-in-out 0s infinite;
 }
 
 .game{
     display: none;
+    z-index: 2;
 }
 
 footer{
@@ -160,31 +168,6 @@ footer span {
         height: 90%;
     }
 }
-
-@keyframes football{
-    0% {
-        transform: rotate(-30deg);
-    }
-    5% {
-        transform: rotate(30deg);
-    }
-    10%{
-        transform: rotate(-30deg);
-    }
-    15%{
-        transform: rotate(30deg);
-    }
-    20%{
-        transform: rotate(-30deg);
-    }
-    25%{
-        transform: rotate(30deg);
-    }
-    35%{
-        transform: rotate(-30deg);
-    }
-}
-
 
 
 
