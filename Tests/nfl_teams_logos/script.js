@@ -202,21 +202,33 @@ const TEAM_LOGOS = [
 const header = document.querySelector("header");
 const playButton = document.querySelector("[data-play]");
 const homeSection = document.querySelector("[data-home]");
-const leftSide = document.querySelector("[data-side='left']");
-const rightSide = document.querySelector("[data-side='right']");
+const homeLeftSide = homeSection.querySelector("[data-side='leftTop']");
+const homeRightSide = homeSection.querySelector("[data-side='rightBottom']");
 const gameSection = document.querySelector("[data-game]");
-
-// when going back to home
-//header.classList.toggle('header-slide-top-to-bottom');
-//playButton.classList.toggle('dissapear');
+const goBack = gameSection.querySelector("[data-back]");
 
 playButton.addEventListener('mouseup', function(){
-    header.classList.toggle('header-slide-bottom-to-top');
-    playButton.classList.toggle('dissapear');
-    leftSide.classList.toggle('left-side-dissapear');
-    rightSide.classList.toggle('right-side-dissapear');
-
+    checkAndToggleClass(header, 'header-slide-top-to-bottom', 'header-slide-bottom-to-top');
+    checkAndToggleClass(playButton, 'appear', 'dissapear');
+    checkAndToggleClass(homeLeftSide, 'left-side-appear', 'left-side-dissapear');
+    checkAndToggleClass(homeRightSide, 'right-side-appear', 'right-side-dissapear');
+    checkAndToggleClass(homeSection, 'section-appear', 'section-dissapear');
 });
+
+goBack.addEventListener('click', function(){
+    checkAndToggleClass(header, 'header-slide-bottom-to-top',  'header-slide-top-to-bottom');
+    checkAndToggleClass(playButton, 'dissapear', 'appear');
+    checkAndToggleClass(homeLeftSide, 'left-side-dissapear', 'left-side-appear');
+    checkAndToggleClass(homeRightSide, 'right-side-dissapear', 'right-side-appear');
+    checkAndToggleClass(homeSection, 'section-dissapear', 'section-appear');
+});
+
+function checkAndToggleClass(element, previousClass, newClass){
+    if (!!previousClass && element.classList.contains(previousClass)){
+        element.classList.remove(previousClass)
+    }
+    element.classList.add(newClass);
+}
 /* 
 let interval;
 let timeout;

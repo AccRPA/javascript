@@ -24,14 +24,14 @@ body {
     background-color: var(--grey-dark-color);
 }
 
+main {
+    position: relative;
+}
+
 .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     overflow: hidden;
-}
-
-.homepage{
-    z-index: 1;
 }
 
 .side {
@@ -67,6 +67,7 @@ header{
     text-align: center;
     color: var(--blue-color);
     width: 100%;
+    z-index: 2;
     padding-left: clamp(20px, 20%, (max(100vw, 500px)/500) * 10);
     padding-right: clamp(20px, 20%, (max(100vw, 500px)/500) * 10);
 }
@@ -133,10 +134,34 @@ header .starts{
     animation: football 2s ease-in-out 0s infinite;
 }
 
-.game{
-    display: none;
-    z-index: 2;
+[data-home]{
+    position: absolute;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
 }
+
+[data-game]{
+    position: absolute;
+    z-index: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* this is just for testing, remove it */
+[data-game] .side{
+    background-color: orange;    
+}
+
+.icon-back {
+    position: absolute;
+    left:0;
+    top: 0;
+    padding: 10px 10px;
+    cursor: pointer;
+}
+
 
 footer{
     position: absolute;
@@ -146,6 +171,7 @@ footer{
     padding: 5px 10px;
     color: var(--blue-color);
     font-size: 0.5rem;
+    z-index: 3;
 }
 
 footer span {
