@@ -219,7 +219,9 @@ goBack.addEventListener('click', function(){
     checkAndToggleClass(header, 'header-slide-bottom-to-top',  'header-slide-top-to-bottom');
     checkAndToggleClass(playButton, 'dissapear', 'appear');
     checkAndToggleClass(homeLeftSide, 'left-side-dissapear', 'left-side-appear');
+    removeClassSecondsLater(homeLeftSide, 'left-side-appear', 1000);
     checkAndToggleClass(homeRightSide, 'right-side-dissapear', 'right-side-appear');
+    removeClassSecondsLater(homeRightSide, 'right-side-appear', 1000);
     checkAndToggleClass(homeSection, 'section-dissapear', 'section-appear');
 });
 
@@ -229,6 +231,16 @@ function checkAndToggleClass(element, previousClass, newClass){
     }
     element.classList.add(newClass);
 }
+
+// this function is because if the 'appear' class is applied when changing from landscape to portrait 
+// it is going to be executed again, creating a non desired effect, so remove it after it is executed
+function removeClassSecondsLater(element, targetClass, seconds){
+    const timeout = setTimeout(function(){
+        element.classList.remove(targetClass);
+        clearTimeout(timeout);
+    }, seconds);    
+}
+
 /* 
 let interval;
 let timeout;
