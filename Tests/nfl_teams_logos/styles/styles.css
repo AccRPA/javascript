@@ -154,7 +154,63 @@ header .starts{
     background-color: orange;    
 }
 
-.top-icon{
+.timer-container{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(100px, calc(min(100vw, 100vh) * 0.4), 200px);
+    outline: none;
+    border: none;
+}
+
+.timer-container .timer {
+    background-color: var(--blue-color);
+    height: 70px;
+    position: relative;
+    top: 0;
+    z-index: 1;
+    border-radius: 20px;
+    border: 2px solid var(--white-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5); 
+    -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
+    font-size: clamp(1rem, calc(min(100vw, 100vh) * 0.08), 2.5rem);
+    color: var(--white-color);
+}
+
+.timer-container > .timer .milliseconds {
+    font-size: calc(clamp(1rem, calc(min(100vw, 100vh) * 0.08), 2.5rem) / 1.8);
+    position: relative;
+    top: -3px;
+}
+
+.timer-container .timer-buttons{
+    height: 50px;
+    top: -15px;
+    position: relative;
+    z-index: 0;
+    background-color: var(--white-color);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border: 2px solid var(--blue-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0px 5px 0px;
+}
+
+.timer-container .timer-buttons i {
+    color: var(--blue-color);
+    font-size: 1rem;
+    padding: 10px clamp(5px, calc(min(100vw, 100vh) * 0.04), 15px);
+    cursor: pointer;
+}
+
+.top-icon {
     position: absolute;
     top: 0;
     padding: 10px 10px;
