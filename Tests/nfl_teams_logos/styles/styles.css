@@ -36,12 +36,14 @@ main {
 
 .side {
     height: 100vh;
+    transition: all 0.2s ease-in-out;
 }
 
 .side img {
     width: 80%;
     max-width: 50%;
-    height: auto;
+    height: auto;    
+    transition: filter 0.2s ease-in-out;
 }
 
 .side p {
@@ -189,26 +191,17 @@ header .starts{
     -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5); 
     -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
     box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.5);
-    font-size: clamp(1rem, calc(min(100vw, 100vh) * 0.08), 2.5rem);
+    font-size: clamp(1.5rem, calc(min(100vw, 100vh) * 0.08), 2.5rem);
     color: var(--white-color);
     padding: 0px 5px;
 }
 
 .timer-container .timer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
     position: relative;
-}
-
-.timer-separator {
-    display: none;
+    top: -4px;
 }
 
 .timer-container span[data-seconds],
-.timer-container span[data-milliseconds],
 .timer-container i {
     width: 60px;
     text-align: center;
@@ -220,14 +213,18 @@ header .starts{
     justify-content: center;
 }
 
-.timer-container span[data-milliseconds] {
+/* .timer-container span[data-milliseconds] {
     font-size: clamp(0.8rem, calc(min(100vw, 100vh) * 0.05), 1.5rem);
-}
+} */
 
 .timer-container i{
     font-size: 1.2rem;
     padding: 25px 0px;
     cursor: pointer;
+}
+
+.timer-container [data-play] {
+    display: none;
 }
 
 .top-icon {
@@ -263,6 +260,14 @@ footer span {
     color: var(--red-color)
 }
 
+.blur{
+    filter: blur(1.5rem);
+}
+
+.no-blur{
+    filter: blur(0);
+}
+
 @media (max-width: 1023px) and (min-height: 520px) {
     .container {
         grid-template-rows: 1fr 1fr;
@@ -286,7 +291,7 @@ footer span {
     }
 
     .timer-container {
-        width: clamp(115px, calc(min(100vw, 100vh) * 0.45), 230px);
+        width: clamp(115px, calc(min(100vw, 100vh) * 0.35), 230px);
         height: 50px;
     }
         
@@ -301,18 +306,9 @@ footer span {
         margin-top: -5px;
     }
 
-    .timer-separator {
-        display: block;
-    }
-
     .timer-container span[data-seconds],
-    .timer-container span[data-milliseconds],
     .timer-container i {
         height: auto;
-    }
-
-    .timer-container span[data-milliseconds] {
-        font-size: inherit;
     }
 
     .timer-container i{

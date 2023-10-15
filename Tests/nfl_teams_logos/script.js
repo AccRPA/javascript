@@ -1,4 +1,3 @@
-let interval;
 const DEFAULT_TIMER = 5; // seconds
 const DEFAULT_ANSWER_TIMER = 3; // seconds
 const ROOT_PATH_FILE = 'logos/';
@@ -208,6 +207,9 @@ const homeRightSide = homeSection.querySelector("[data-side='rightBottom']");
 const gameSection = document.querySelector("[data-game]");
 const goBack = gameSection.querySelector("[data-back]");
 const config = gameSection.querySelector("[data-config]");
+const gamePause = gameSection.querySelector("[data-pause]");
+const gamePlay = gameSection.querySelector("[data-play]");
+const gameForward = gameSection.querySelector("[data-forward]");
 
 const gameLeftSide = gameSection.querySelector("[data-side='leftTop']");
 const gameLeftSideLogo = gameLeftSide.querySelector("[data-logo='team1']");
@@ -218,12 +220,12 @@ const gameRightSideLogo = gameRightSide.querySelector("[data-logo='team2']");
 const gameRightSideName = gameRightSide.querySelector("[data-name='team2']");
 
 const seconds = gameSection.querySelector("[data-seconds]");
-const milliseconds = gameSection.querySelector("[data-milliseconds]");
 
+let interval;
 let timeout;
-let automatic_mode = false;
 let timeToGuess = DEFAULT_TIMER;
 let answerDisplayTimer = DEFAULT_ANSWER_TIMER;
+let selectedTeams = {};
 
 playButton.addEventListener('mouseup', function(){
     checkAndToggleClass(header, 'header-slide-top-to-bottom', 'header-slide-bottom-to-top');
@@ -232,25 +234,12 @@ playButton.addEventListener('mouseup', function(){
     checkAndToggleClass(homeRightSide, 'right-side-appear', 'right-side-dissapear');
     checkAndToggleClass(homeSection, 'section-appear', 'section-dissapear');
 
-    cleanTimeout();
-    //show the teams logos
-    const indexes = getTwoTeamsIndexes();
-    const team1 = TEAM_LOGOS[indexes.index1];
-    const team2 = TEAM_LOGOS[indexes.index2];
-    
-    gameLeftSideLogo.src = `${ROOT_PATH_FILE}${team1.file}.${FILE_EXTENSION}`;
-    gameLeftSide.style.backgroundColor = team1.color;
-    
-    gameRightSideLogo.src = `${ROOT_PATH_FILE}${team2.file}.${FILE_EXTENSION}`;
-    gameRightSide.style.backgroundColor = team2.color;
-
-    const timeout = setTimeout(function(){
-        clearTimeout(timeout);
-        callInterval(team1, team2);
-    }, 1500);
+    start();
 });
 
 goBack.addEventListener('click', function(){
+    clearTimeouts();
+    resetGameData();
     checkAndToggleClass(header, 'header-slide-bottom-to-top',  'header-slide-top-to-bottom');
     checkAndToggleClass(playButton, 'dissapear', 'appear');
     checkAndToggleClass(homeLeftSide, 'left-side-dissapear', 'left-side-appear');
@@ -258,6 +247,26 @@ goBack.addEventListener('click', function(){
     checkAndToggleClass(homeRightSide, 'right-side-dissapear', 'right-side-appear');
     removeClassSecondsLater(homeRightSide, 'right-side-appear', 1000);
     checkAndToggleClass(homeSection, 'section-dissapear', 'section-appear');
+});
+
+gamePause.addEventListener('click', function(){
+    gamePause.style.display='none';
+    gamePlay.style.display='flex';
+    clearInterval(interval);
+    checkAndToggleClass(gameLeftSideLogo, 'no-blur', 'blur');
+    checkAndToggleClass(gameRightSideLogo, 'no-blur', 'blur');
+});
+
+gamePlay.addEventListener('click', function(){
+    gamePlay.style.display='none';
+    gamePause.style.display='flex';
+    checkAndToggleClass(gameLeftSideLogo, 'blur', 'no-blur');
+    checkAndToggleClass(gameRightSideLogo, 'blur', 'no-blur');
+    callInterval();
+});
+
+gameForward.addEventListener('click', function(){
+    start();
 });
 
 function checkAndToggleClass(element, previousClass, newClass){
@@ -290,7 +299,7 @@ function randomNumber(){
     return Math.floor(Math.random() * TEAM_LOGOS.length);
 }
 
-function cleanTimeout(){
+function clearTimeouts(){
     if (!!interval){
         clearInterval(interval);
     }
@@ -299,39 +308,67 @@ function cleanTimeout(){
     }
 }
 
-function callInterval(team1, team2){
-    let timerSeconds = timeToGuess;
-    let timerMilliseconds = 0;
+function setTeams(){
+    //show the teams logos
+    const indexes = getTwoTeamsIndexes();
+    const team1 = TEAM_LOGOS[indexes.index1];
+    const team2 = TEAM_LOGOS[indexes.index2];
+    
+    gameLeftSideLogo.src = `${ROOT_PATH_FILE}${team1.file}.${FILE_EXTENSION}`;
+    checkAndToggleClass(gameLeftSideLogo, 'no-blur', 'blur');
+    gameLeftSide.style.backgroundColor = team1.color;
+    
+    gameRightSideLogo.src = `${ROOT_PATH_FILE}${team2.file}.${FILE_EXTENSION}`;
+    checkAndToggleClass(gameRightSideLogo, 'no-blur', 'blur');
+    gameRightSide.style.backgroundColor = team2.color;
 
-    seconds.innerText = String(timerSeconds).padStart(2,'0');
-    milliseconds.innerText = String(timerMilliseconds).padStart(2,'0');
+    selectedTeams.team1 = team1;
+    selectedTeams.team2 = team2;
+}
 
-    displayDeciSeconds();
+function start(){
+    clearTimeouts();
+    resetGameData();
+    setTeams();    
+    const timeout = setTimeout(function(){
+        clearTimeout(timeout);
+
+        timeToGuess = DEFAULT_TIMER;
+        seconds.innerText = String(timeToGuess).padStart(2,'0');
+        checkAndToggleClass(gameLeftSideLogo, 'blur', 'no-blur');
+        checkAndToggleClass(gameRightSideLogo, 'blur', 'no-blur');
+
+        callInterval();
+    }, 1100);
+}
+
+function callInterval(){
     interval = setInterval(() => {
-        if (timerSeconds == 0){
+        if (timeToGuess == 0){
             clearInterval(interval);
             // display the teams names
-            gameLeftSideName.innerText = team1.team;
-            gameRightSideName.innerText = team2.team
+            gameLeftSideName.innerText = selectedTeams.team1.team;
+            gameRightSideName.innerText = selectedTeams.team2.team
             seconds.innerText = '--';
-            milliseconds.innerText = '--';            
-        }else{
-            displayDeciSeconds();
-            timerSeconds = timerSeconds - 1;            
-            seconds.innerText = String(timerSeconds).padStart(2,'0');
+            
+            const timeout = setTimeout(() => {
+                clearTimeout(timeout);
+                start();
+            }, answerDisplayTimer * 1000);
+        }else{            
+            timeToGuess = timeToGuess - 1;            
+            seconds.innerText = String(timeToGuess).padStart(2,'0');
         }
     }, 1000);
 }
 
-function displayDeciSeconds(){
-    let timerMilliseconds = 0;
-    let interval2 = setInterval(() => {
-        timerMilliseconds = timerMilliseconds == 0 ? 99 : timerMilliseconds - 1;
-        milliseconds.innerText = String(timerMilliseconds).padStart(2,'0');
-        if(timerMilliseconds == 0){
-            clearInterval(interval2);
-        }
-    }, 10);
+
+function resetGameData(){
+    gameLeftSideName.innerText = '';
+    gameRightSideName.innerText = '';
+    seconds.innerText = '--';
+    timeToGuess = DEFAULT_TIMER;
+    selectedTeams = {};
 }
 /* 
 let interval;
