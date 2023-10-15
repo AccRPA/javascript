@@ -198,7 +198,7 @@ header .starts{
 
 .timer-container .timer {
     position: relative;
-    top: -4px;
+    top: -3px;
 }
 
 .timer-container span[data-seconds],
@@ -212,10 +212,6 @@ header .starts{
     align-items: center;
     justify-content: center;
 }
-
-/* .timer-container span[data-milliseconds] {
-    font-size: clamp(0.8rem, calc(min(100vw, 100vh) * 0.05), 1.5rem);
-} */
 
 .timer-container i{
     font-size: 1.2rem;
@@ -243,6 +239,54 @@ header .starts{
 
 .icon-right{    
     right:0;
+}
+
+.configuration{
+    display: none;
+    position: absolute;
+    top: 45px;
+    right: 10px;
+    background-color: var(--grey-light-color);
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 10px;
+    z-index: 0;
+    -webkit-box-shadow: 0px 0px 5px 0px #000000;
+    box-shadow: 0px 0px 5px 0px #000000;
+}
+
+.configuration-container{
+    display: flex;
+    justify-content: center;
+    user-select: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    gap: 10px;
+}
+
+.input-number {
+    width: 50px;
+    font-size: 1rem;
+    padding-left: 5px;
+    height: 25px;
+}
+
+.apply-button {
+    background-color: var(--blue-color);
+    color: var(--grey-light-color);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 10px 10px;
+    cursor: pointer;
 }
 
 footer{
@@ -291,7 +335,7 @@ footer span {
     }
 
     .timer-container {
-        width: clamp(115px, calc(min(100vw, 100vh) * 0.35), 230px);
+        width: clamp(115px, calc(min(100vw, 100vh) * 0.3), 230px);
         height: 50px;
     }
         
@@ -315,12 +359,12 @@ footer span {
         padding: 15px 0px;
     }
 }
-
+/* 
 @media (max-width: 720px) and (max-height: 519px) {
     .timer-container{
         width: clamp(115px, calc(min(100vw, 100vh) * 0.3), 230px);
     }
-}
+} */
 
 
 

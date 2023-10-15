@@ -57,6 +57,21 @@
                     <i class="fa fa-forward" aria-hidden="true" data-forward></i>                
                 </div>
             </section>
+            <section class="configuration" title="Configuraton" data-configuration>
+                <div class="configuration-container">
+                    <div class="input-group">                
+                        <label for="timeForGuess">Time for guessing (sec)</label>
+                        <input id="timeForGuess" name="timeForGuess" 
+                            type="number" step="1" min="1" max="59" class="input-number" data-input="guess">
+                    </div>
+                    <div class="input-group">
+                        <label for="timeAnswer">Display answer (sec)</label>
+                        <input id="timeAnswer" name="timeAnswer" 
+                            type="number" step="1" min="1" max="59" class="input-number" data-input="answer">
+                    </div>
+                    <button class="apply-button" data-apply>Apply</button>
+                </div>
+            </section>
         </main>
         <footer class="footer">
             <div class="made">Made with <span>&#10084;</span> in 2023</div>

@@ -1,5 +1,5 @@
 const DEFAULT_TIMER = 5; // seconds
-const DEFAULT_ANSWER_TIMER = 3; // seconds
+const DEFAULT_ANSWER_TIMER = 2; // seconds
 const ROOT_PATH_FILE = 'logos/';
 const FILE_EXTENSION = 'png';
 const TEAM_LOGOS = [
@@ -205,8 +205,6 @@ const homeSection = document.querySelector("[data-home]");
 const homeLeftSide = homeSection.querySelector("[data-side='leftTop']");
 const homeRightSide = homeSection.querySelector("[data-side='rightBottom']");
 const gameSection = document.querySelector("[data-game]");
-const goBack = gameSection.querySelector("[data-back]");
-const config = gameSection.querySelector("[data-config]");
 const gamePause = gameSection.querySelector("[data-pause]");
 const gamePlay = gameSection.querySelector("[data-play]");
 const gameForward = gameSection.querySelector("[data-forward]");
@@ -219,12 +217,20 @@ const gameRightSide = gameSection.querySelector("[data-side='rightBottom']");
 const gameRightSideLogo = gameRightSide.querySelector("[data-logo='team2']");
 const gameRightSideName = gameRightSide.querySelector("[data-name='team2']");
 
+const goBack = gameSection.querySelector("[data-back]");
+const config = gameSection.querySelector("[data-config]");
 const seconds = gameSection.querySelector("[data-seconds]");
+const configSection = document.querySelector("[data-configuration]");
+const inputGuess = configSection.querySelector("[data-input='guess']");
+const inputAnswer = configSection.querySelector("[data-input='answer']");
+const configApply = configSection.querySelector("[data-apply]");
 
 let interval;
 let timeout;
 let timeToGuess = DEFAULT_TIMER;
-let answerDisplayTimer = DEFAULT_ANSWER_TIMER;
+let timeForDisplayAnswer = DEFAULT_ANSWER_TIMER;
+let timeToGuessInput = DEFAULT_TIMER;
+let timeForDisplayAnswerInput = DEFAULT_ANSWER_TIMER;
 let selectedTeams = {};
 
 playButton.addEventListener('mouseup', function(){
@@ -247,6 +253,30 @@ goBack.addEventListener('click', function(){
     checkAndToggleClass(homeRightSide, 'right-side-dissapear', 'right-side-appear');
     removeClassSecondsLater(homeRightSide, 'right-side-appear', 1000);
     checkAndToggleClass(homeSection, 'section-dissapear', 'section-appear');
+});
+
+config.addEventListener('click', function(){
+    if (configSection.style.display == 'block'){
+        configSection.style.display = 'none';
+    }else{
+        inputGuess.value = timeToGuessInput;
+        inputAnswer.value = timeForDisplayAnswerInput;
+        configSection.style.display = 'block';
+    }
+});
+
+/* document.addEventListener('click', function(event){
+    const dataset = event.target.dataset;
+    if (!dataset.hasOwnProperty('configuration') && !dataset.hasOwnProperty('config')){
+        configSection.style.display = 'none';
+    }
+}); */
+
+configApply.addEventListener('click', function(){
+    timeToGuessInput = getValue(inputGuess.value, DEFAULT_TIMER);
+    timeForDisplayAnswerInput = getValue(inputAnswer.value, DEFAULT_ANSWER_TIMER);
+    configSection.style.display = 'none';
+    start();
 });
 
 gamePause.addEventListener('click', function(){
@@ -332,9 +362,8 @@ function start(){
     setTeams();    
     const timeout = setTimeout(function(){
         clearTimeout(timeout);
-
-        timeToGuess = DEFAULT_TIMER;
         seconds.innerText = String(timeToGuess).padStart(2,'0');
+        gamePause.style.visibility = 'visible';
         checkAndToggleClass(gameLeftSideLogo, 'blur', 'no-blur');
         checkAndToggleClass(gameRightSideLogo, 'blur', 'no-blur');
 
@@ -347,6 +376,7 @@ function callInterval(){
         if (timeToGuess == 0){
             clearInterval(interval);
             // display the teams names
+            gamePause.style.visibility = 'hidden';
             gameLeftSideName.innerText = selectedTeams.team1.team;
             gameRightSideName.innerText = selectedTeams.team2.team
             seconds.innerText = '--';
@@ -354,7 +384,7 @@ function callInterval(){
             const timeout = setTimeout(() => {
                 clearTimeout(timeout);
                 start();
-            }, answerDisplayTimer * 1000);
+            }, timeForDisplayAnswer * 1000);
         }else{            
             timeToGuess = timeToGuess - 1;            
             seconds.innerText = String(timeToGuess).padStart(2,'0');
@@ -362,103 +392,17 @@ function callInterval(){
     }, 1000);
 }
 
-
 function resetGameData(){
+    timeToGuess = timeToGuessInput;
+    timeForDisplayAnswer = timeForDisplayAnswerInput;
+    selectedTeams = {};
+    seconds.innerText = '--';
+    configSection.style.display = 'none';
     gameLeftSideName.innerText = '';
     gameRightSideName.innerText = '';
-    seconds.innerText = '--';
-    timeToGuess = DEFAULT_TIMER;
-    selectedTeams = {};
-}
-/* 
-let interval;
-let timeout;
-let automatic_mode = false;
-let timeToGuess = DEFAULT_TIMER;
-let answerDisplayTimer = DEFAULT_ANSWER_TIMER;
-
-const menu = document.getElementById('menu');
-const submenu = document.getElementById('submenu');
-const automatic_check = document.getElementById('automatic');
-const guessingTimer = document.getElementById('guessingTimer');
-const answerTimer = document.getElementById('answerTimer');
-
-const applyButton = document.getElementById('apply');
-
-const startText = document.getElementById('startText');
-const startButton = document.getElementById('start');
-const timerLayer = document.getElementById('timer');
-
-const leftSide = document.getElementById('left_side');
-const leftImage = document.getElementById('img_left');
-const leftName = document.getElementById('name_left');
-
-const rightSide = document.getElementById('right_side');
-const rightImage = document.getElementById('img_right');
-const rightName = document.getElementById('name_right');
-
-guessingTimer.value = DEFAULT_TIMER;
-answerTimer.value = DEFAULT_ANSWER_TIMER;
-
-menu.addEventListener('click', function(){
-    if (submenu.style.display === 'block'){
-        submenu.style.display = 'none';
-    }else{
-        submenu.style.display = 'block';
-    }
-});
-
-applyButton.addEventListener('click', function(){    
-    automatic_mode = automatic_check.checked;
-    timeToGuess = getValue(guessingTimer.value, DEFAULT_TIMER);
-    answerDisplayTimer = getValue(answerTimer.value, DEFAULT_ANSWER_TIMER);
-
-    // updating the values in case they were no valid
-    guessingTimer.value = timeToGuess;
-    answerTimer.value = answerDisplayTimer;
-
-    // close the submenu
-    submenu.style.display = 'none';
-    if (!!interval){
-        clearInterval(interval);
-    }
-    if(!!timeout){
-        clearTimeout(timeout);
-    }
-
-    if (automatic_mode){
-        start();
-    }else{
-        resetPlayButton();
-
-        // deleting the data from both sides
-        startText.style.display = 'block';
-        leftImage.src = '';
-        leftSide.style.backgroundColor = 'initial';
-        rightImage.src = '';
-        rightSide.style.backgroundColor = 'initial';
-        leftName.innerText = '';
-        rightName.innerText = '';
-    }
-});
-
-startButton.addEventListener('click',
-function(){
-    start();
-});
-
-function getTwoIndexes(){
-    const index1 = randomNumber();
-    let index2 = randomNumber();
-    do{
-        index2 = randomNumber();
-    }while(index1 === index2);
-
-    return {index1, index2};
-}
-
-function randomNumber(){
-    return Math.floor(Math.random() * TEAM_LOGOS.length);
+    gamePause.style.visibility = 'hidden';
+    gamePause.style.display='flex';
+    gamePlay.style.display = 'none';
 }
 
 function getValue(valueText, defaultValue){
@@ -467,64 +411,3 @@ function getValue(valueText, defaultValue){
     }
     return +valueText <= 0 ? defaultValue : +valueText;
 }
-
-function resetPlayButton(){    
-    startButton.style.display = 'block';
-    startButton.style.visibility = 'visible';
-    timerLayer.style.display = 'none';
-    timerLayer.innerText = '';
-}
-
-function start(){
-    // toggle the play button and time layer
-    startText.style.display = 'none';
-    startButton.style.display = 'none';
-    startButton.style.visibility = 'hidden';
-    timerLayer.style.display = 'block';
-    timerLayer.innerText = '';
-
-    // remove the teams names
-    leftName.innerText = null;
-    rightName.innerText = null;
-    
-    //show the teams logos
-    const indexes = getTwoIndexes();
-    const team1 = TEAM_LOGOS[indexes.index1];
-    const team2 = TEAM_LOGOS[indexes.index2];
-    
-    leftImage.src = `${ROOT_PATH_FILE}${team1.file}.${FILE_EXTENSION}`;
-    leftSide.style.backgroundColor = team1.color;
-    
-    rightImage.src = `${ROOT_PATH_FILE}${team2.file}.${FILE_EXTENSION}`;
-    rightSide.style.backgroundColor = team2.color;
-
-    // start the timer
-    callInterval(team1, team2);
-}
-// Interval for guessing the teams names in 5 seconds
-function callInterval(team1, team2){
-    let timerStart = timeToGuess;
-    timerLayer.innerText = timerStart;
-    interval = setInterval(() => {
-        if (timerStart == 1){
-            clearInterval(interval);
-            // display the teams names
-            leftName.innerText = team1.team;
-            rightName.innerText = team2.team;
-
-            if (automatic_mode){
-                timerLayer.innerText = '-';
-                (() => {
-                    timeout = setTimeout(() => {
-                        start();
-                    }, answerDisplayTimer * 1000);
-                })();
-            }else{
-                resetPlayButton();
-            }      
-        }else{
-            timerStart--;
-            timerLayer.innerText = timerStart;
-        }
-    }, 1000);
-} */
