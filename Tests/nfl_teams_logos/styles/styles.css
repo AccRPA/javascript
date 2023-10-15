@@ -151,7 +151,10 @@ header .starts{
 
 /* this is just for testing, remove it */
 [data-game] .side{
-    background-color: orange;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .timer-container{
@@ -182,10 +185,11 @@ header .starts{
     color: var(--white-color);
 }
 
-.timer-container > .timer .milliseconds {
-    font-size: calc(clamp(1rem, calc(min(100vw, 100vh) * 0.08), 2.5rem) / 1.8);
-    position: relative;
-    top: -3px;
+.timer-container .timer span[data-seconds],
+.timer-container .timer span[data-milliseconds],
+.timer-container .timer i {
+    width: 55px;
+    text-align: center;
 }
 
 .timer-container .timer-buttons{
@@ -208,6 +212,13 @@ header .starts{
     font-size: 1rem;
     padding: 10px clamp(5px, calc(min(100vw, 100vh) * 0.04), 15px);
     cursor: pointer;
+}
+
+[data-pause="timer"]{
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: none;
 }
 
 .top-icon {
@@ -243,7 +254,7 @@ footer span {
     color: var(--red-color)
 }
 
-@media (max-width: 576px) {
+@media (max-width: 1023px) and (min-height: 520px) {
     .container {
         grid-template-rows: 1fr 1fr;
         grid-template-columns: unset;
@@ -256,6 +267,41 @@ footer span {
     .defult-bkg-img {
         width: auto;
         height: 90%;
+    }
+
+    .timer-container .timer {
+        height: 50px;
+    }
+    
+    .timer-container .timer span {
+        margin-top: -5px;
+    }
+
+    .timer-container .timer-buttons {
+        height: 40px;
+        top: 50%;
+        position: absolute;
+        z-index: 0;
+        background-color: var(--white-color);
+        border-radius: 10px;
+        border: 2px solid var(--blue-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 0px 5px 0px;
+        width: calc(clamp(100px, calc(min(100vw, 100vh) * 0.4), 200px) * 1.8);
+        max-width: 290px;
+        min-width: 160px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    [data-pause="timer"]{
+        display: block;
+    }
+
+    [data-pause="button"]{
+        display: none;
     }
 }
 

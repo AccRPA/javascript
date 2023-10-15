@@ -42,18 +42,25 @@
             <section class="container" title="Game page" data-game>
                 <i class="fa fa-home top-icon icon-left" aria-hidden="true" title="Back" data-back></i>
                 <i class="fa fa-cog top-icon icon-right" aria-hidden="true" title="Configuration" data-config></i>
-                <div class="side left-side" data-side="leftTop">                    
+                <div class="side left-side" data-side="leftTop">
+                    <img title="team1" data-logo="team1">
+                    <span data-name="team1"></span>                
                 </div>
                 <div class="side right-side" data-side="rightBottom">
+                    <img title="team2" data-logo="team2">
+                    <span data-name="team2"></span>
                 </div>
                 <div class="timer-container">
                     <div class="timer">
-                        <span>02:00:<span class="milliseconds">30</span></span>
+                        <i class="fa fa-pause" aria-hidden="true" data-pause="timer"></i>
+                        <span data-seconds>--</span>
+                        <span>:</span>
+                        <span data-milliseconds>--</span>
                     </div>
                     <div class="timer-buttons">
                         <i class="fa fa-backward" aria-hidden="true"></i>
-                        <i class="fa fa-pause" aria-hidden="true"></i>
-                        <!-- <i class="fa fa-play" aria-hidden="true"></i> -->
+                        <i class="fa fa-pause" aria-hidden="true" data-pause="button"></i>
+                        <!-- <i class="fa fa-play" aria-hidden="true" data-play="button"></i> -->
                         <i class="fa fa-forward" aria-hidden="true"></i>
                     </div>
                 </div>

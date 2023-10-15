@@ -1,3 +1,4 @@
+let interval;
 const DEFAULT_TIMER = 5; // seconds
 const DEFAULT_ANSWER_TIMER = 3; // seconds
 const ROOT_PATH_FILE = 'logos/';
@@ -206,6 +207,23 @@ const homeLeftSide = homeSection.querySelector("[data-side='leftTop']");
 const homeRightSide = homeSection.querySelector("[data-side='rightBottom']");
 const gameSection = document.querySelector("[data-game]");
 const goBack = gameSection.querySelector("[data-back]");
+const config = gameSection.querySelector("[data-config]");
+
+const gameLeftSide = gameSection.querySelector("[data-side='leftTop']");
+const gameLeftSideLogo = gameLeftSide.querySelector("[data-logo='team1']");
+const gameLeftSideName = gameLeftSide.querySelector("[data-name='team1']");
+
+const gameRightSide = gameSection.querySelector("[data-side='rightBottom']");
+const gameRightSideLogo = gameRightSide.querySelector("[data-logo='team2']");
+const gameRightSideName = gameRightSide.querySelector("[data-name='team2']");
+
+const seconds = gameSection.querySelector("[data-seconds]");
+const milliseconds = gameSection.querySelector("[data-milliseconds]");
+
+let timeout;
+let automatic_mode = false;
+let timeToGuess = DEFAULT_TIMER;
+let answerDisplayTimer = DEFAULT_ANSWER_TIMER;
 
 playButton.addEventListener('mouseup', function(){
     checkAndToggleClass(header, 'header-slide-top-to-bottom', 'header-slide-bottom-to-top');
@@ -213,6 +231,23 @@ playButton.addEventListener('mouseup', function(){
     checkAndToggleClass(homeLeftSide, 'left-side-appear', 'left-side-dissapear');
     checkAndToggleClass(homeRightSide, 'right-side-appear', 'right-side-dissapear');
     checkAndToggleClass(homeSection, 'section-appear', 'section-dissapear');
+
+    cleanTimeout();
+    //show the teams logos
+    const indexes = getTwoTeamsIndexes();
+    const team1 = TEAM_LOGOS[indexes.index1];
+    const team2 = TEAM_LOGOS[indexes.index2];
+    
+    gameLeftSideLogo.src = `${ROOT_PATH_FILE}${team1.file}.${FILE_EXTENSION}`;
+    gameLeftSide.style.backgroundColor = team1.color;
+    
+    gameRightSideLogo.src = `${ROOT_PATH_FILE}${team2.file}.${FILE_EXTENSION}`;
+    gameRightSide.style.backgroundColor = team2.color;
+
+    const timeout = setTimeout(function(){
+        clearTimeout(timeout);
+        callInterval(team1, team2);
+    }, 1500);
 });
 
 goBack.addEventListener('click', function(){
@@ -241,6 +276,63 @@ function removeClassSecondsLater(element, targetClass, seconds){
     }, seconds);    
 }
 
+function getTwoTeamsIndexes(){
+    const index1 = randomNumber();
+    let index2 = randomNumber();
+    do{
+        index2 = randomNumber();
+    }while(index1 === index2);
+
+    return {index1, index2};
+}
+
+function randomNumber(){
+    return Math.floor(Math.random() * TEAM_LOGOS.length);
+}
+
+function cleanTimeout(){
+    if (!!interval){
+        clearInterval(interval);
+    }
+    if(!!timeout){
+        clearTimeout(timeout);
+    }
+}
+
+function callInterval(team1, team2){
+    let timerSeconds = timeToGuess;
+    let timerMilliseconds = 0;
+
+    seconds.innerText = String(timerSeconds).padStart(2,'0');
+    milliseconds.innerText = String(timerMilliseconds).padStart(2,'0');
+
+    displayDeciSeconds();
+    interval = setInterval(() => {
+        if (timerSeconds == 0){
+            clearInterval(interval);
+            // display the teams names
+            gameLeftSideName.innerText = team1.team;
+            gameRightSideName.innerText = team2.team
+            seconds.innerText = '--';
+            milliseconds.innerText = '--';            
+        }else{
+            displayDeciSeconds();
+            timerSeconds = timerSeconds - 1;            
+            seconds.innerText = String(timerSeconds).padStart(2,'0');
+        }
+    }, 1000);
+}
+
+function displayDeciSeconds(){
+    let timerMilliseconds = 0;
+    let interval2 = setInterval(() => {
+        timerMilliseconds = timerMilliseconds == 0 ? 99 : timerMilliseconds - 1;
+        milliseconds.innerText = String(timerMilliseconds).padStart(2,'0');
+        if(timerMilliseconds == 0){
+            clearInterval(interval2);
+        }
+    }, 10);
+}
 /* 
 let interval;
 let timeout;

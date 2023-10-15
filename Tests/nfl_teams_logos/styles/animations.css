@@ -159,7 +159,7 @@
     animation: right-side-appear 1s ease-in-out 0s 1 normal forwards; 
 }
 
-@media (max-width: 576px) {
+@media (max-width: 1023px) and (min-height: 520px) {
     .left-side-dissapear{
         animation: top-side-dissapear 1s ease-in-out 0s 1 normal forwards; 
     }
