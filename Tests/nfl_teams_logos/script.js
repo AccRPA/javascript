@@ -269,13 +269,6 @@ config.addEventListener('click', function(){
     }
 });
 
-/* document.addEventListener('click', function(event){
-    const dataset = event.target.dataset;
-    if (!dataset.hasOwnProperty('configuration') && !dataset.hasOwnProperty('config')){
-        configSection.style.display = 'none';
-    }
-}); */
-
 configApply.addEventListener('click', function(){
     timeToGuessInput = getValue(inputGuess.value, DEFAULT_TIMER);
     timeForDisplayAnswerInput = getValue(inputAnswer.value, DEFAULT_ANSWER_TIMER);
