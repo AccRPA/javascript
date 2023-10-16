@@ -241,17 +241,15 @@ playButton.addEventListener('mouseup', function(){
     checkAndToggleClass(playButton, 'appear', 'dissapear');
     checkAndToggleClass(homeLeftSide, 'left-side-appear', 'left-side-dissapear');
     checkAndToggleClass(homeRightSide, 'right-side-appear', 'right-side-dissapear');
-    checkAndToggleClass(homeSection, 'section-appear', 'section-dissapear');
-    
-    configSection.classList.remove('configuraton-show');
+    checkAndToggleClass(homeSection, 'section-appear', 'section-dissapear');    
+    checkAndToggleClass(configSection, 'config-appear', 'config-dissapear');
     start();
 });
 
 goBack.addEventListener('click', function(){
     clearTimeouts();
     resetGameData();
-    configSection.classList.remove('configuraton-show');
-
+    checkAndToggleClass(configSection, 'config-appear', 'config-dissapear');
     checkAndToggleClass(header, 'header-slide-bottom-to-top',  'header-slide-top-to-bottom');
     checkAndToggleClass(playButton, 'dissapear', 'appear');
     checkAndToggleClass(homeLeftSide, 'left-side-dissapear', 'left-side-appear');
@@ -262,10 +260,11 @@ goBack.addEventListener('click', function(){
 });
 
 config.addEventListener('click', function(){
-    configSection.classList.toggle('configuraton-show');
-    if (configSection.classList.contains('configuraton-show')){
+    if (configSection.classList.contains('config-dissapear')){
+        checkAndToggleClass(configSection, 'config-dissapear', 'config-appear');
         pause();
     }else{
+        checkAndToggleClass(configSection, 'config-appear', 'config-dissapear');
         play();
     }
 });
@@ -280,7 +279,7 @@ config.addEventListener('click', function(){
 configApply.addEventListener('click', function(){
     timeToGuessInput = getValue(inputGuess.value, DEFAULT_TIMER);
     timeForDisplayAnswerInput = getValue(inputAnswer.value, DEFAULT_ANSWER_TIMER);
-    configSection.classList.remove('configuraton-show');
+    checkAndToggleClass(configSection, 'config-appear', 'config-dissapear');
     start();
 });
 
@@ -379,7 +378,7 @@ function pause(){
 }
 
 function play(){
-    configSection.classList.remove('configuraton-show');
+    checkAndToggleClass(configSection, 'config-appear', 'config-dissapear');
     gamePlay.style.display='none';
     gamePause.style.display='flex';
     checkAndToggleClass(gameLeftSideLogo, 'blur', 'no-blur');
