@@ -242,10 +242,9 @@ header .starts{
 }
 
 .configuration{
-    display: none;
     position: absolute;
     top: 45px;
-    right: 10px;
+    right: -290px;
     background-color: var(--grey-light-color);
     border: none;
     padding: 10px 15px;
@@ -254,6 +253,11 @@ header .starts{
     z-index: 0;
     -webkit-box-shadow: 0px 0px 5px 0px #000000;
     box-shadow: 0px 0px 5px 0px #000000;
+    transition: right 0.4s ease-in-out;
+}
+
+.configuraton-show{
+    right: 10px;
 }
 
 .configuration-container{

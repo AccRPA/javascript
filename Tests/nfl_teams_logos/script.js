@@ -233,19 +233,25 @@ let timeToGuessInput = DEFAULT_TIMER;
 let timeForDisplayAnswerInput = DEFAULT_ANSWER_TIMER;
 let selectedTeams = {};
 
+inputGuess.value = timeToGuessInput;
+inputAnswer.value = timeForDisplayAnswerInput;
+
 playButton.addEventListener('mouseup', function(){
     checkAndToggleClass(header, 'header-slide-top-to-bottom', 'header-slide-bottom-to-top');
     checkAndToggleClass(playButton, 'appear', 'dissapear');
     checkAndToggleClass(homeLeftSide, 'left-side-appear', 'left-side-dissapear');
     checkAndToggleClass(homeRightSide, 'right-side-appear', 'right-side-dissapear');
     checkAndToggleClass(homeSection, 'section-appear', 'section-dissapear');
-
+    
+    configSection.classList.remove('configuraton-show');
     start();
 });
 
 goBack.addEventListener('click', function(){
     clearTimeouts();
     resetGameData();
+    configSection.classList.remove('configuraton-show');
+
     checkAndToggleClass(header, 'header-slide-bottom-to-top',  'header-slide-top-to-bottom');
     checkAndToggleClass(playButton, 'dissapear', 'appear');
     checkAndToggleClass(homeLeftSide, 'left-side-dissapear', 'left-side-appear');
@@ -256,12 +262,11 @@ goBack.addEventListener('click', function(){
 });
 
 config.addEventListener('click', function(){
-    if (configSection.style.display == 'block'){
-        configSection.style.display = 'none';
+    configSection.classList.toggle('configuraton-show');
+    if (configSection.classList.contains('configuraton-show')){
+        pause();
     }else{
-        inputGuess.value = timeToGuessInput;
-        inputAnswer.value = timeForDisplayAnswerInput;
-        configSection.style.display = 'block';
+        play();
     }
 });
 
@@ -275,24 +280,16 @@ config.addEventListener('click', function(){
 configApply.addEventListener('click', function(){
     timeToGuessInput = getValue(inputGuess.value, DEFAULT_TIMER);
     timeForDisplayAnswerInput = getValue(inputAnswer.value, DEFAULT_ANSWER_TIMER);
-    configSection.style.display = 'none';
+    configSection.classList.remove('configuraton-show');
     start();
 });
 
 gamePause.addEventListener('click', function(){
-    gamePause.style.display='none';
-    gamePlay.style.display='flex';
-    clearInterval(interval);
-    checkAndToggleClass(gameLeftSideLogo, 'no-blur', 'blur');
-    checkAndToggleClass(gameRightSideLogo, 'no-blur', 'blur');
+    pause();
 });
 
 gamePlay.addEventListener('click', function(){
-    gamePlay.style.display='none';
-    gamePause.style.display='flex';
-    checkAndToggleClass(gameLeftSideLogo, 'blur', 'no-blur');
-    checkAndToggleClass(gameRightSideLogo, 'blur', 'no-blur');
-    callInterval();
+    play();
 });
 
 gameForward.addEventListener('click', function(){
@@ -371,17 +368,35 @@ function start(){
     }, 1100);
 }
 
+function pause(){
+    gamePause.style.display='none';
+    gamePlay.style.display='flex';
+    clearTimeouts();
+    if (seconds.innerText !== '--'){
+        checkAndToggleClass(gameLeftSideLogo, 'no-blur', 'blur');
+        checkAndToggleClass(gameRightSideLogo, 'no-blur', 'blur');
+    }
+}
+
+function play(){
+    configSection.classList.remove('configuraton-show');
+    gamePlay.style.display='none';
+    gamePause.style.display='flex';
+    checkAndToggleClass(gameLeftSideLogo, 'blur', 'no-blur');
+    checkAndToggleClass(gameRightSideLogo, 'blur', 'no-blur');
+    callInterval();
+}
+
 function callInterval(){
     interval = setInterval(() => {
         if (timeToGuess == 0){
             clearInterval(interval);
             // display the teams names
-            gamePause.style.visibility = 'hidden';
             gameLeftSideName.innerText = selectedTeams.team1.team;
             gameRightSideName.innerText = selectedTeams.team2.team
             seconds.innerText = '--';
             
-            const timeout = setTimeout(() => {
+            timeout = setTimeout(() => {
                 clearTimeout(timeout);
                 start();
             }, timeForDisplayAnswer * 1000);
@@ -397,7 +412,6 @@ function resetGameData(){
     timeForDisplayAnswer = timeForDisplayAnswerInput;
     selectedTeams = {};
     seconds.innerText = '--';
-    configSection.style.display = 'none';
     gameLeftSideName.innerText = '';
     gameRightSideName.innerText = '';
     gamePause.style.visibility = 'hidden';
