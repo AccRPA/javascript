@@ -165,7 +165,6 @@ header .starts{
     height: 100vh;
 }
 
-/* this is just for testing, remove it */
 [data-game] .side{
     display: flex;
     flex-direction: column;
@@ -178,7 +177,7 @@ header .starts{
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: clamp(115px, calc(min(100vw, 100vh) * 0.4), 190px);
+    width: clamp(115px, calc(min(100vw, 100vh) * 0.35), 190px);
     outline: none;
     background-color: var(--blue-color);
     height: 50px;
