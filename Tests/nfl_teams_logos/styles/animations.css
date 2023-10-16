@@ -136,8 +136,8 @@
 
 @keyframes config-appear{
     0%{    
-        display: block;    
         transform: translateX(290px);
+        display: block;    
     }
     100%{
         transform: translateX(0vw);
