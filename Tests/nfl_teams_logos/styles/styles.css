@@ -178,10 +178,10 @@ header .starts{
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: clamp(115px, calc(min(100vw, 100vh) * 0.45), 190px);
+    width: clamp(115px, calc(min(100vw, 100vh) * 0.4), 190px);
     outline: none;
     background-color: var(--blue-color);
-    height: 70px;
+    height: 50px;
     z-index: 1;
     border-radius: 20px;
     border: 2px solid var(--white-color);
@@ -266,6 +266,7 @@ header .starts{
     user-select: none;
     flex-direction: column;
     gap: 10px;
+    color: var(--blue-color);
 }
 
 .input-group {
@@ -338,11 +339,6 @@ footer span {
         height: 90%;
     }
 
-    .timer-container {
-        width: clamp(115px, calc(min(100vw, 100vh) * 0.3), 230px);
-        height: 50px;
-    }
-        
     .timer-container .timer {
         display: flex;
         flex-direction: row;
@@ -363,222 +359,3 @@ footer span {
         padding: 15px 0px;
     }
 }
-/* 
-@media (max-width: 720px) and (max-height: 519px) {
-    .timer-container{
-        width: clamp(115px, calc(min(100vw, 100vh) * 0.3), 230px);
-    }
-} */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-.sides img {
-    width: 80%;
-    max-width: 300px;
-    height: auto;
-}
-
-.sides p {
-    font-size: 1.5rem;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    min-height: 5rem;
-}
-
-#startText {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    margin-top: 2px;
-    text-align: center;    
-    color: #ffffff;
-}
-
-.center_layer {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    width: 4rem;
-    height: 4rem;
-    overflow: hidden;
-    border: 2px solid #003a70;
-    -webkit-box-shadow: 0px 0px 5px 0px #000000; 
-    box-shadow: 0px 0px 5px 0px #000000;    
-    background-color: #003a70;
-}
-
-.center_layer button {
-    border: none;
-    outline: none;
-    background-color: transparent;
-    width: 100%;
-    height: 100%;
-    display: block;
-    margin-left: 2px;
-}
-
-.center_layer button:hover{
-    cursor: pointer;
-    transform: scale(1.2,1.2);
-    transition: scale 0.8s ease-in-out;
-}
-
-.center_layer button:focus{
-    outline: none;
-}
-
-.center_layer button i{ 
-    font-size: 2.5rem;
-    color: white;
-}
-
-#timer {
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    color: white;
-}
-
-.footer {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.nfl_icon{
-    width: 3rem;
-    height: 3rem;
-}
-
-.made {
-    font-size: 0.5rem;
-    background: white;
-    border-radius: 10px;
-    padding: 0px 5px;
-}
-
-.made .heart{
-    color: #e31b23;
-}
-
-#menu {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    z-index: 1;
-    cursor: pointer;
-    background-color: #003a70;
-    color: white;
-    padding: 2px 5px 0px 5px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0px 0px 5px 0px #000000; 
-    box-shadow: 0px 0px 5px 0px #000000;    
-}
-
-#menu i {
-    font-size: 1.5rem;
-}
-
-#submenu {
-    display: none;
-    position: absolute;
-    top: 40px;
-    right: 5px;
-    z-index: 1;
-    background-color: white;
-    padding: 10px 15px;
-    font-size: 0.8rem;
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 5px 0px #000000; 
-    box-shadow: 0px 0px 5px 0px #000000;  
-}
-
-.submenu_container {
-    display: flex;
-    justify-content: center;
-    align-items: left;
-    user-select: none;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.submenu_group {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-    gap: 10px;
-}
-
-.input_number{
-    width: 40px;
-}
-
-.apply_button{
-    background-color: #003a70;
-    color: white;
-    border: none;
-    outline: none;
-    border-radius: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.apply_button:hover{
-    outline: none;
-}
-
-.apply_button:focus {
-    outline: none;
-}
-
-@media only screen and (max-width: 576px) {
-    .container {
-        flex-direction: column;
-    }
-
-    .sides {
-        width: 100%;
-        height: 50%;
-    }
-    .sides img {
-        height: 80%;
-        max-height: 170px;
-        width: auto;
-        margin-top: 20px;
-    }
-
-    .nfl_icon{        
-        width: 2.5rem;
-        height: 2.5rem;
-    }
-}
-*/
