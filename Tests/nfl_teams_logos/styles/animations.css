@@ -127,24 +127,6 @@
     }
 }
 
-@keyframes config-dissapear{
-    100%{
-        transform: translateX(290px);
-        display: none;
-    }
-}
-
-@keyframes config-appear{
-    0%{    
-        transform: translateX(290px);
-        display: block;    
-    }
-    100%{
-        transform: translateX(0vw);
-    }
-}
-
-
 .header-slide-bottom-to-top {
     animation: header-slide-bottom-to-top 1s ease-in-out 0s 1 normal forwards;
 }
@@ -175,14 +157,6 @@
 
 .right-side-appear{
     animation: right-side-appear 1s ease-in-out 0s 1 normal forwards; 
-}
-
-.config-dissapear{
-    animation: config-dissapear 1s ease-in-out 0s 1 normal forwards;
-}
-
-.config-appear{
-    animation: config-appear 1s ease-in-out 0s 1 normal forwards; 
 }
 
 @media (max-width: 1023px) and (min-height: 520px) {

@@ -242,14 +242,14 @@ playButton.addEventListener('mouseup', function(){
     checkAndToggleClass(homeLeftSide, 'left-side-appear', 'left-side-dissapear');
     checkAndToggleClass(homeRightSide, 'right-side-appear', 'right-side-dissapear');
     checkAndToggleClass(homeSection, 'section-appear', 'section-dissapear');    
-    checkAndToggleClass(configSection, 'config-appear', 'config-dissapear');
+    configSection.classList.remove('configuration-show');
     start();
 });
 
 goBack.addEventListener('click', function(){
     clearTimeouts();
     resetGameData();
-    checkAndToggleClass(configSection, 'config-appear', 'config-dissapear');
+    configSection.classList.remove('configuration-show');
     checkAndToggleClass(header, 'header-slide-bottom-to-top',  'header-slide-top-to-bottom');
     checkAndToggleClass(playButton, 'dissapear', 'appear');
     checkAndToggleClass(homeLeftSide, 'left-side-dissapear', 'left-side-appear');
@@ -260,11 +260,10 @@ goBack.addEventListener('click', function(){
 });
 
 config.addEventListener('click', function(){
-    if (configSection.classList.contains('config-dissapear')){
-        checkAndToggleClass(configSection, 'config-dissapear', 'config-appear');
+    configSection.classList.toggle('configuration-show');
+    if (configSection.classList.contains('configuration-show')){
         pause();
     }else{
-        checkAndToggleClass(configSection, 'config-appear', 'config-dissapear');
         play();
     }
 });
@@ -272,7 +271,7 @@ config.addEventListener('click', function(){
 configApply.addEventListener('click', function(){
     timeToGuessInput = getValue(inputGuess.value, DEFAULT_TIMER);
     timeForDisplayAnswerInput = getValue(inputAnswer.value, DEFAULT_ANSWER_TIMER);
-    checkAndToggleClass(configSection, 'config-appear', 'config-dissapear');
+    configSection.classList.remove('configuration-show');
     start();
 });
 
@@ -371,7 +370,7 @@ function pause(){
 }
 
 function play(){
-    checkAndToggleClass(configSection, 'config-appear', 'config-dissapear');
+    configSection.classList.remove('configuration-show');
     gamePlay.style.display='none';
     gamePause.style.display='flex';
     checkAndToggleClass(gameLeftSideLogo, 'blur', 'no-blur');
