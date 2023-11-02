@@ -20,6 +20,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 2.5rem;
 }
 
 .book {
@@ -79,4 +80,93 @@ body {
     transition: all 0.3s cubic-bezier(0,0,1,1);
     transform: rotateY(35deg);
     width: 65%;
+}
+
+.book2{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.book2:hover .cover{
+    transform: rotateX(30deg) rotateY(-180deg);
+}
+
+.book2:hover .page{
+    transform: rotateX(30deg) rotateY(-180deg);
+    z-index: 2;
+}
+
+.cover{
+    z-index: 1;
+    transition: all 3s;
+}
+
+.back-cover{
+    z-index: -2;
+}
+
+.cover,
+.back-cover {
+    height: 72px;
+    width: 64px;
+    background-color: #353755;
+    border-radius: 2px 8px 8px 2px;
+    position: absolute;
+    box-shadow: 1px 1px 5px gray;
+    transform: rotateX(30deg);
+    transform-origin: center left;
+}
+
+.page,
+.last-page{
+    height: 65px;
+    width: 60px;
+    background-color: white;
+    position: absolute;
+    border-radius: 2px 8px 8px 2px;
+    transform: rotateX(30deg);
+    z-index: -1;
+    transform-origin: center left;
+}
+
+.last-page h2{
+    font-size: 10px;
+    text-align: center;
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+}
+
+.page:nth-child(2){
+    transition-duration: 3s;
+}
+.page:nth-child(3){
+    transition-duration: 2.6s;
+}
+.page:nth-child(4){
+    transition-duration: 2.2s;
+}
+.page:nth-child(5){
+    transition-duration: 1.8s;
+}
+.page:nth-child(6){
+    transition-duration: 1.4s;
+}
+
+.book2:hover .page:nth-child(2){
+    transition-duration: 6s;
+}
+.book2:hover .page:nth-child(3){
+    transition-duration: 5.6s;
+}
+.book2:hover .page:nth-child(4){
+    transition-duration: 5.2s;
+}
+.book2:hover .page:nth-child(5){
+    transition-duration: 4.8s;
+}
+.book2:hover .page:nth-child(6){
+    transition-duration: 4.4s;
 }
