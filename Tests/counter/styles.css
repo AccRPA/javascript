@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        180deg,
+        rgb(74, 135, 234) 0%,
+        rgb(24, 96, 204) 100%
+    );
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.position{ 
+    display: block;
+    height: clamp(0.35rem, 23vw, 10.5rem);
+    overflow: hidden;
+}
+.digit {
+    font-size: clamp(0.35rem, 12vw, 7.5rem);
+    color: white;
+    background: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    height: clamp(0.35rem, 23vw, 10.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2px;
+    user-select: none;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+button{
+    width: clamp(2rem, 4vw, 5rem);
+    padding: 10px;
+    font-size: 1.4rem;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.reverse {
+    transform: translateY(calc(-2px - clamp(0.35rem, 23vw, 10.5rem)));
+}
+
+.animate .digit{
+    animation: up 0.5s ease-in-out forwards;
+}
+
+.animate-reverse .digit {
+    animation: down 0.5s ease-in-out forwards;
+}
+
+@keyframes up {    
+    90%{
+        filter: blur(1.5px);
+    }
+    100% {
+        transform: translateY(calc(-2px - clamp(0.35rem, 23vw, 10.5rem)));
+        filter: blur(0px);
+    }
+}
+
+@keyframes down {
+    90%{
+        filter: blur(1.5px);
+    }
+    100% {
+        transform: translateY(0);
+        filter: blur(0px);
+    }
+}
