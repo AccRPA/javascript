@@ -73,8 +73,17 @@ button{
 }
 
 @keyframes up {    
-    90%{
-        filter: blur(1.5px);
+    10%{
+        filter: blur(1px);
+    }
+    50%{
+        transform: translateY(calc(-15px - clamp(0.35rem, 23vw, 10.5rem)));
+    }
+    65%{
+        transform: translateY(calc(-3px - clamp(0.35rem, 23vw, 10.5rem)));
+    }
+    80%{
+        transform: translateY(calc(-1px - clamp(0.35rem, 23vw, 10.5rem)));
     }
     100% {
         transform: translateY(calc(-2px - clamp(0.35rem, 23vw, 10.5rem)));
@@ -83,8 +92,17 @@ button{
 }
 
 @keyframes down {
-    90%{
-        filter: blur(1.5px);
+    10%{
+        filter: blur(1px);
+    }
+    50%{
+        transform: translateY(15px);
+    }
+    65%{
+        transform: translateY(3px);
+    }
+    80%{
+        transform: translateY(-1px);
     }
     100% {
         transform: translateY(0);
