@@ -31,15 +31,15 @@ document.getElementById('minus').addEventListener('click', function(){
     toggleDisableButtons();
     const element = document.createElement('div');
     element.classList.add('digit');
-    element.classList.add('reverse');
+    element.classList.add('moveup');
     element.innerText = count;
 
-    container.children[0].classList.add('reverse');
+    container.children[0].classList.add('moveup');
     container.prepend(element);
     container.classList.add('animate-reverse');
     setTimeout(() => {
         container.removeChild(container.children[container.childElementCount - 1]);
-        container.children[0].classList.remove('reverse');
+        container.children[0].classList.remove('moveup');
         container.classList.remove('animate-reverse');
         toggleDisableButtons();
     }, animationTime);

@@ -60,7 +60,7 @@ button{
     cursor: pointer;
 }
 
-.reverse {
+.moveup {
     transform: translateY(calc(-2px - clamp(0.35rem, 23vw, 10.5rem)));
 }
 
