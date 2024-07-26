@@ -1,3 +1,5 @@
+![javascript exercises](https://img.shields.io/badge/javascript-exercises-8A2BE2)
+
 # 📄 About
 
 This is a collection of JavaScript exercises and small projects to practice knowledge. 😃
